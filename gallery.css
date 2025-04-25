@@ -1,0 +1,212 @@
+body {
+  background-color: #000;
+  font-family: "Courier New", sans-serif;
+  color: white;
+  overflow-x: hidden;
+}
+
+.gallery-section {
+  min-height: 100vh;
+  position: relative;
+}
+
+.gallery-sidebar {
+  padding: 2rem 0;
+  height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #2ec4b6 #000;
+  /* Scrollbar styling for Webkit browsers */
+}
+.gallery-sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+.gallery-sidebar::-webkit-scrollbar-track {
+  background: #000;
+}
+.gallery-sidebar::-webkit-scrollbar-thumb {
+  background-color: #2ec4b6;
+  border-radius: 10px;
+}
+
+.sidebar-content {
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  justify-content: center;
+}
+
+.gallery-year {
+  font-size: 3rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.4s ease;
+  margin: 1.5rem 0;
+  transform: translateX(0);
+}
+.gallery-year.active {
+  font-weight: 700;
+  color: white;
+  font-size: 3.7rem;
+  transform: translateX(20px);
+}
+
+.gallery-display {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.gallery-card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.gallery-card:not(.active) {
+  transform: translateY(100%);
+}
+
+.card-content {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  width: 100%;
+  height: 80%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+.card-title {
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.card-subtitle {
+  font-weight: 400;
+  font-size: 1.2rem;
+  color: #2ec4b6;
+}
+
+.card-description {
+  max-width: 60%;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.card-range {
+  font-size: 4rem;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+.read-more {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.read-more:hover {
+  background-color: #2ec4b6;
+  color: white;
+}
+
+.card-indicator {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 2rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.indicator-dot.active {
+  background-color: white;
+}
+
+.grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 992px) {
+  .gallery-sidebar {
+    height: auto;
+    max-height: 300px;
+    padding: 1rem 0;
+  }
+  .sidebar-content {
+    padding: 1rem 0;
+  }
+  .gallery-year {
+    font-size: 3rem;
+    margin: 1rem 0;
+  }
+  .gallery-year.active {
+    font-size: 4rem;
+  }
+  .gallery-display {
+    height: 70vh;
+  }
+  .card-title {
+    font-size: 1.8rem;
+  }
+  .card-description {
+    max-width: 100%;
+  }
+  .card-range {
+    font-size: 2.5rem;
+  }
+}/*# sourceMappingURL=gallery.css.map */

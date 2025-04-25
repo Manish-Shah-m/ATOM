@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATOM - Gallery</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="gallery.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap');
+
+  
+    </style>
+</head>
+<body>
+
+<section class="gallery-section">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Left sidebar with year/category navigation -->
+            <div class="col-lg-3 gallery-sidebar">
+                <div class="sidebar-content">
+                    <div class="gallery-year active" data-target="office">Office & Workplace</div>
+                    <div class="gallery-year" data-target="team">Team & Staff</div>
+                    <div class="gallery-year" data-target="projects">Projects & Work</div>
+                    <div class="gallery-year" data-target="culture">Culture & Values</div>
+                    <div class="gallery-year" data-target="facilities">Facilities & Tech</div>
+                    <!-- You can add more categories here and they'll be scrollable -->
+                    <div class="gallery-year" data-target="events">Events & Meetups</div>
+                    <div class="gallery-year" data-target="partners">Partners & Clients</div>
+                </div>
+            </div>
+            
+            <!-- Right content area with gallery cards -->
+            <div class="col-lg-9 gallery-display">
+                <!-- Office & Workplace Card -->
+                <div class="gallery-card active" id="office">
+                    <div class="card-content">
+                        <img src="photo/office.jpg" alt="Office space" class="card-image">
+                        <div class="grid-overlay"></div>
+                        <div class="card-overlay">
+                            <div>
+                                <div class="card-title">Office & Workplace</div>
+                                <div class="card-subtitle">Modern Collaborative Space</div>
+                                <div class="card-indicator">
+                                    <div class="indicator-dot active"></div>
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot"></div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-description">
+                                    Designed for creativity and collaboration, our office spaces reflect our commitment to innovation and employee wellbeing.
+                                </div>
+                                <div class="card-range">01</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team & Staff Card -->
+                <div class="gallery-card" id="team">
+                    <div class="card-content">
+                        <img src="photo/teams.jpg" alt="Team members" class="card-image">
+                        <div class="grid-overlay"></div>
+                        <div class="card-overlay">
+                            <div>
+                                <div class="card-title">Team & Staff</div>
+                                <div class="card-subtitle">Creative Professionals</div>
+                                <div class="card-indicator">
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot active"></div>
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot"></div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-description">
+                                    Our diverse team of experts brings together a wealth of knowledge and experience across design, marketing, and technology.
+                                </div>
+                                <div class="card-range">02</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projects & Work Card -->
+                <div class="gallery-card" id="projects">
+                    <div class="card-content">
+                        <img src="photo/image.png" alt="Project showcase" class="card-image">
+                        <div class="grid-overlay"></div>
+                        <div class="card-overlay">
+                            <div>
+                                <div class="card-title">Projects & Work</div>
+                                <div class="card-subtitle">Award-Winning Campaigns</div>
+                                <div class="card-indicator">
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot active"></div>
+                                    <div class="indicator-dot"></div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-description">
+                                    From global brand strategies to innovative digital experiences, our portfolio showcases our commitment to excellence.
+                                </div>
+                                <div class="card-range">03</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Culture & Values Card -->
+                <div class="gallery-card" id="culture">
+                    <div class="card-content">
+                        <img src="photo/values.jpg" alt="Company culture" class="card-image">
+                        <div class="grid-overlay"></div>
+                        <div class="card-overlay">
+                            <div>
+                                <div class="card-title">Culture & Values</div>
+                                <div class="card-subtitle">Our Core Principles</div>
+                                <div class="card-indicator">
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot active"></div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-description">
+                                    Innovation, integrity, and inclusivity form the foundation of our company culture, driving our approach to every project.
+                                </div>
+                                <div class="card-range">04</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Facilities & Tech Card -->
+                <div class="gallery-card" id="facilities">
+                    <div class="card-content">
+                        <img src="photo/tech.jpg" alt="Technology and facilities" class="card-image">
+                        <div class="grid-overlay"></div>
+                        <div class="card-overlay">
+                            <div>
+                                <div class="card-title">Facilities & Tech</div>
+                                <div class="card-subtitle">Cutting-Edge Resources</div>
+                                <div class="card-indicator">
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot active"></div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-description">
+                                    Our state-of-the-art facilities and technology stack enable us to deliver exceptional results for our clients.
+                                </div>
+                                <div class="card-range">05</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Events & Meetups Card -->
+                <div class="gallery-card" id="events">
+                    <div class="card-content">
+                        <img src="photo/events.jpg" alt="Company events" class="card-image">
+                        <div class="grid-overlay"></div>
+                        <div class="card-overlay">
+                            <div>
+                                <div class="card-title">Events & Meetups</div>
+                                <div class="card-subtitle">Building Community</div>
+                                <div class="card-indicator">
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot active"></div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-description">
+                                    Regular workshops, conferences, and networking events that connect our team with industry leaders and innovators.
+                                </div>
+                                <div class="card-range">06</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Partners & Clients Card -->
+                <div class="gallery-card" id="partners">
+                    <div class="card-content">
+                        <img src="photo/patners.jpg" alt="Partners and clients" class="card-image">
+                        <div class="grid-overlay"></div>
+                        <div class="card-overlay">
+                            <div>
+                                <div class="card-title">Partners & Clients</div>
+                                <div class="card-subtitle">Trusted Relationships</div>
+                                <div class="card-indicator">
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot"></div>
+                                    <div class="indicator-dot active"></div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-description">
+                                    Proud to collaborate with forward-thinking brands and organizations that share our vision for innovation and excellence.
+                                </div>
+                                <div class="card-range">07</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const yearElements = document.querySelectorAll('.gallery-year');
+        
+        yearElements.forEach(year => {
+            year.addEventListener('click', function() {
+                // Remove active class from all years
+                yearElements.forEach(y => y.classList.remove('active'));
+                
+                // Add active class to clicked year
+                this.classList.add('active');
+                
+                // Get target card id
+                const targetId = this.getAttribute('data-target');
+                
+                // Hide all cards
+                const allCards = document.querySelectorAll('.gallery-card');
+                allCards.forEach(card => card.classList.remove('active'));
+                
+                // Show target card
+                const targetCard = document.getElementById(targetId);
+                targetCard.classList.add('active');
+                
+                // Scroll the clicked item into view if needed
+                this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
