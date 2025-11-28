@@ -1,0 +1,2461 @@
+// ===================================
+// ATOM AGENCY - MAIN STYLESHEET
+// ===================================
+// ===================================
+// GLOBAL FONT OVERRIDE - COURIER NEW
+// ===================================
+
+* {
+  font-family: 'Courier New', Courier, monospace !important;
+}
+
+body,
+html {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+// Override Bootstrap and other libraries
+.container,
+.row,
+.col,
+button,
+input,
+select,
+textarea,
+label,
+a,
+p,
+h1, h2, h3, h4, h5, h6,
+span,
+div {
+  font-family: 'Courier New', Courier, monospace;
+}
+// ===================================
+// 1. VARIABLES & CONFIGURATION
+// ===================================
+
+// Color Variables
+$highlight-color: #2ec4b6;
+$dark-bg: #000;
+$secondary-dark: #0a0a0a;
+$tertiary-dark: #0f0f0f;
+$text-light: rgba(255, 255, 255, 0.7);
+$text: #f5f5f5;
+$border-color: rgba(255, 255, 255, 0.1);
+$section-number-color: rgba(255, 255, 255, 0.5);
+$hover-change: #1b4332;
+$overlay-dark: rgba(0, 0, 0, 0.75);
+
+// Typography
+$font-primary: 'Montserrat', sans-serif;
+
+// Transitions
+$transition-base: all 0.3s ease;
+$transition-slow: all 0.5s ease;
+
+// Breakpoints
+$breakpoint-mobile: 576px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 992px;
+$breakpoint-large: 1200px;
+
+// ===================================
+// 2. RESET & BASE STYLES
+// ===================================
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  background-color: $dark-bg;
+  font-family: $font-primary;
+  color: white;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+// ===================================
+// 3. ACCESSIBILITY UTILITIES
+// ===================================
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: $dark-bg;
+  color: $highlight-color;
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 10000;
+  font-weight: 600;
+  border: 2px solid $highlight-color;
+
+  &:focus {
+    top: 0;
+    outline: 3px solid $highlight-color;
+    outline-offset: 2px;
+  }
+}
+
+// Focus styles for accessibility
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid $highlight-color;
+  outline-offset: 2px;
+}
+
+// ===================================
+// 4. SCROLL PROGRESS INDICATOR
+// ===================================
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 9998;
+
+  &-bar {
+    height: 100%;
+    background: linear-gradient(90deg, $highlight-color, #64ffda);
+    width: 0%;
+    transition: width 0.1s ease;
+  }
+}
+
+// ===================================
+// 5. CUSTOM CURSOR
+// ===================================
+
+.custom-cursor {
+  width: 40px;
+  height: 40px;
+  border: 2px solid $highlight-color;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: all 0.15s ease;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+
+  &.cursor-hover {
+    width: 60px;
+    height: 60px;
+    background: rgba(46, 196, 182, 0.1);
+  }
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: $highlight-color;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .custom-cursor,
+  .cursor-dot {
+    display: none;
+  }
+}
+
+// ===================================
+// 6. NAVIGATION
+// ===================================
+
+.navbar {
+  background-color: transparent;
+  padding: 1.5rem 2rem;
+  transition: all 0.4s ease;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1000;
+  width: 100%;
+  height: 80px;
+  transform: translateY(-100%);
+
+  &.visible {
+    background-color: rgba(0, 0, 0, 0.95);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+    backdrop-filter: blur(10px);
+  }
+}
+
+.container-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #fff;
+  flex: 1;
+
+  img {
+    width: 35px;
+    height: 35px;
+    transition: $transition-base;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.navbar-search {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+
+  @media (max-width: $breakpoint-desktop) {
+    order: 3;
+    flex: 0 0 100%;
+    margin-top: 1rem;
+    display: none;
+
+    &.active {
+      display: flex;
+    }
+  }
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  padding-bottom: 5px;
+  position: relative;
+}
+
+.search-input {
+  background: transparent;
+  border: none;
+  padding: 0.5rem 0;
+  color: #fff;
+  width: 100%;
+  outline: none;
+  font-size: 0.9rem;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+.search-button {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: $transition-base;
+
+  &:hover {
+    color: $highlight-color;
+    transform: translateY(-50%) translateX(3px);
+  }
+}
+
+.arrow-icon {
+  font-style: normal;
+  font-size: 1.2rem;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 2rem;
+  flex: 1;
+  justify-content: flex-end;
+
+  @media (max-width: $breakpoint-desktop) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.98);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+    z-index: 999;
+
+    &.active {
+      transform: translateX(0);
+    }
+  }
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+  position: relative;
+
+  &:hover {
+    color: $highlight-color;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -5px;
+    left: 0;
+    background-color: $highlight-color;
+    transition: width 0.3s ease;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+
+  @media (max-width: $breakpoint-desktop) {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+}
+
+.navbar-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 8px;
+  z-index: 1000;
+
+  @media (max-width: $breakpoint-desktop) {
+    display: flex;
+  }
+
+  .bar {
+    width: 25px;
+    height: 2px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+  }
+
+  &.active {
+    .bar:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .bar:nth-child(2) {
+      transform: rotate(-45deg) translate(1px, -1px);
+    }
+  }
+}
+
+// ===================================
+// 7. HERO SECTION
+// ===================================
+
+.hero-section {
+  min-height: 100vh;
+  background-color: $dark-bg;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-image: url("../photo/HERO-IMG (2).png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  @media (max-width: $breakpoint-tablet) {
+    background-size: contain;
+    background-position: top center;
+  }
+}
+
+.grid-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+}
+
+.year-tag {
+  position: absolute;
+  top: 200px;
+  left: 50px;
+  font-size: 22px;
+  font-weight: 700;
+  z-index: 2;
+  color: $text;
+
+  @media (max-width: $breakpoint-tablet) {
+    left: 20px;
+    top: 150px;
+    font-size: 18px;
+  }
+}
+
+.designer-tag {
+  position: absolute;
+  top: 230px;
+  left: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 2;
+  color: $text-light;
+
+  @media (max-width: $breakpoint-tablet) {
+    left: 20px;
+    top: 175px;
+    font-size: 12px;
+  }
+}
+
+.company-name {
+  font-size: clamp(32px, 8vw, 48px);
+  font-weight: 700;
+  letter-spacing: 4px;
+  z-index: 2;
+  color: $text;
+}
+
+.service-tags {
+  position: absolute;
+  bottom: 100px;
+  right: 50px;
+  text-align: right;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 2;
+  color: $text;
+
+  @media (max-width: $breakpoint-tablet) {
+    right: 20px;
+    font-size: 12px;
+    bottom: 80px;
+  }
+}
+
+.content-left,
+.content-right {
+  position: absolute;
+  max-width: 220px;
+  z-index: 2;
+  font-size: 8px;
+  line-height: 1.4;
+  color: $text-light;
+  text-transform: uppercase;
+
+  @media (max-width: $breakpoint-tablet) {
+    display: none;
+  }
+}
+
+.content-left {
+  bottom: 100px;
+  left: 50px;
+}
+
+.content-right {
+  top: 100px;
+  right: 50px;
+  text-align: right;
+}
+
+// ===================================
+// 8. INFO SECTION
+// ===================================
+
+#intro {
+  background-color: $dark-bg;
+  padding: 2rem 0;
+}
+
+.info-section {
+  border-bottom: 1px solid $border-color;
+  padding: 1.5rem 0;
+  text-transform: uppercase;
+
+  &:first-child {
+    padding-top: 2.5rem;
+  }
+}
+
+.section-title {
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: $text;
+  opacity: 0.8;
+}
+
+.section-content {
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  color: $text;
+  max-width: 65ch;
+}
+
+.section-number {
+  text-align: right;
+  color: $section-number-color;
+  font-size: 0.85rem;
+}
+
+.icon-bar {
+  padding: 1rem 0;
+  border-bottom: 1px solid $border-color;
+}
+
+.icon-item {
+  width: 34px;
+  height: 34px;
+  margin-right: 2rem;
+  opacity: 0.7;
+  transition: $transition-base;
+
+  &:hover {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.slash-separator {
+  padding: 0 0.5rem;
+  opacity: 0.7;
+}
+
+// ===================================
+// 9. STATISTICS SECTION
+// ===================================
+
+#stats-section {
+  padding: 80px 0;
+  background-color: $dark-bg;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(46, 196, 182, 0.1) 0%, transparent 70%);
+  }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-box {
+  text-align: center;
+  padding: 30px;
+  border: 1px solid $border-color;
+  transition: $transition-base;
+  background: rgba(255, 255, 255, 0.02);
+
+  &:hover {
+    border-color: $highlight-color;
+    transform: translateY(-10px);
+    background: rgba(46, 196, 182, 0.05);
+    box-shadow: 0 10px 30px rgba(46, 196, 182, 0.2);
+  }
+}
+
+.stat-number {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: $highlight-color;
+  margin-bottom: 10px;
+  font-feature-settings: 'tnum';
+  font-variant-numeric: tabular-nums;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 2.5rem;
+  }
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: $text-light;
+  letter-spacing: 1px;
+}
+
+// ===================================
+// 10. CLIENTS LOGO SECTION
+// ===================================
+
+#clients-section {
+  padding: 60px 0;
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+}
+
+.clients-heading {
+  text-align: center;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  margin-bottom: 40px;
+  color: $text-light;
+  font-weight: 600;
+}
+
+.clients-marquee {
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-content {
+  display: flex;
+  gap: 60px;
+  animation: marquee 30s linear infinite;
+
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+.client-logo {
+  height: 50px;
+  width: auto;
+  opacity: 0.6;
+  filter: grayscale(100%) brightness(2);
+  transition: $transition-base;
+
+  &:hover {
+    opacity: 1;
+    filter: grayscale(0%) brightness(1);
+    transform: scale(1.1);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+// ===================================
+// 11. EXPERTISE/FEATURED WORK SECTION
+// ===================================
+
+#featured-work-section {
+  padding: 80px 0;
+  background-color: $dark-bg;
+
+  .section-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+    text-align: left;
+    margin-bottom: 60px;
+    color: $text;
+    letter-spacing: 3px;
+    position: relative;
+  }
+
+  .work-item {
+    position: relative;
+    height: 350px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    &:first-child {
+      height: 450px;
+    }
+
+    @media (max-width: $breakpoint-tablet) {
+      height: 280px;
+
+      &:first-child {
+        height: 320px;
+      }
+    }
+  }
+
+  .work-item-1 {
+    background-image: url(../photo/image.png);
+  }
+
+  .work-item-2 {
+    background-image: url(../photo/work-item-2.jpg);
+  }
+
+  .work-item-3 {
+    background-image: url(https://images.unsplash.com/photo-1622737133809-d95047b9e673?q=80&w=1932);
+  }
+
+  .work-item-4 {
+    background-image: url(https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2070);
+    background-size: contain;
+  }
+
+  .work-item-5 {
+    background-image: url(https://images.unsplash.com/photo-1556589937-1b3bffe9238a?q=80&w=2070);
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $overlay-dark;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+
+    h3 {
+      color: white;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      transform: translateY(20px);
+      transition: transform 0.4s ease;
+      text-align: center;
+
+      @media (max-width: $breakpoint-tablet) {
+        font-size: 1.5rem;
+      }
+    }
+
+    p {
+      color: white;
+      font-size: 1.1rem;
+      text-align: center;
+      transform: translateY(20px);
+      transition: transform 0.4s ease 0.1s;
+      max-width: 80%;
+
+      @media (max-width: $breakpoint-tablet) {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .work-item:hover .overlay {
+    opacity: 1;
+
+    h3,
+    p {
+      transform: translateY(0);
+    }
+  }
+}
+
+// ===================================
+// 12. DESIGNER SPOTLIGHT SECTION
+// ===================================
+
+#designer-spotlight {
+  padding: 120px 0;
+  background-color: $dark-bg;
+  position: relative;
+  overflow: hidden;
+
+  @media (max-width: $breakpoint-desktop) {
+    padding: 80px 0;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    padding: 60px 0;
+  }
+
+  .section-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+    text-align: left;
+    margin-bottom: 80px;
+    color: $text;
+    letter-spacing: 3px;
+    position: relative;
+
+    @media (max-width: $breakpoint-desktop) {
+      margin-bottom: 60px;
+    }
+
+    @media (max-width: $breakpoint-tablet) {
+      margin-bottom: 40px;
+    }
+  }
+
+  .designer-profile {
+    margin-bottom: 60px;
+  }
+
+  .designer-image {
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .image-container {
+      position: relative;
+      overflow: hidden;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+
+      @media (max-width: $breakpoint-tablet) {
+        width: 250px;
+        height: 250px;
+        margin-bottom: 30px;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+      }
+
+      .designer-grid {
+        z-index: 1;
+      }
+    }
+  }
+
+  .designer-info {
+    padding: 30px 0 30px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
+    @media (max-width: $breakpoint-desktop) {
+      padding: 30px 0;
+    }
+
+    .designer-name {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: 3px;
+      margin-bottom: 10px;
+      color: $text;
+    }
+
+    .designer-title {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+      color: $text-light;
+    }
+
+    .designer-bio {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      margin-bottom: 30px;
+      color: $text;
+      max-width: 90%;
+    }
+  }
+
+  .expertise-container,
+  .achievements-container,
+  .connect-container {
+    margin-bottom: 30px;
+
+    .expertise-title,
+    .achievements-title,
+    .connect-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 10px;
+      color: $text-light;
+      opacity: 0.8;
+    }
+
+    .expertise-tags {
+      font-size: 0.85rem;
+      color: $text;
+      text-transform: uppercase;
+    }
+  }
+
+  .achievements-list {
+    .achievement-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+
+      .achievement-number {
+        color: $section-number-color;
+        margin-right: 15px;
+        font-size: 0.85rem;
+      }
+
+      .achievement-text {
+        font-size: 0.85rem;
+        color: $text;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .connect-icons {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    a {
+      transition: $transition-base;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+
+    .connect-icon {
+      width: 34px;
+      height: 34px;
+      opacity: 0.7;
+      transition: $transition-base;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .designer-philosophy {
+    padding-top: 50px;
+    border-top: 1px solid $border-color;
+
+    .philosophy-container {
+      text-align: center;
+      max-width: 80%;
+      margin: 0 auto;
+
+      @media (max-width: $breakpoint-desktop) {
+        max-width: 100%;
+      }
+
+      .philosophy-quote {
+        font-size: clamp(1rem, 2vw, 1.5rem);
+        line-height: 1.6;
+        font-weight: 500;
+        margin-bottom: 20px;
+        color: $text;
+        letter-spacing: 1px;
+      }
+
+      .philosophy-attribution {
+        font-size: 0.9rem;
+        color: $highlight-color;
+        font-weight: 500;
+      }
+    }
+  }
+}
+// ===================================
+// TESTIMONIALS SECTION - IMPROVED
+// ===================================
+
+#testimonial {
+  padding: 120px 0;
+  background: linear-gradient(180deg, $dark-bg 0%, $secondary-dark 100%);
+  position: relative;
+  font-family: 'Courier New', monospace;
+
+  @media (max-width: $breakpoint-desktop) {
+    padding: 80px 0;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    padding: 60px 0;
+  }
+
+  // Section Header
+  .testimonial-header {
+    text-align: center;
+    margin-bottom: 80px;
+
+    @media (max-width: $breakpoint-tablet) {
+      margin-bottom: 50px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 700;
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+      color: $text;
+      font-family: 'Courier New', monospace;
+    }
+
+    .testimonial-subtitle {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      color: $text-light;
+      letter-spacing: 2px;
+      font-family: 'Courier New', monospace;
+    }
+  }
+
+  // Testimonial Grid
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    margin-bottom: 80px;
+
+    @media (max-width: $breakpoint-mobile) {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+  }
+
+  // Testimonial Card
+  .testimonial-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid $border-color;
+    padding: 0;
+    transition: $transition-base;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, $highlight-color, transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s ease;
+    }
+
+    &:hover {
+      transform: translateY(-10px);
+      border-color: $highlight-color;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+
+      &::before {
+        transform: scaleX(1);
+      }
+
+      .client-avatar img {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  // Card Header
+  .testimonial-header-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 30px;
+    border-bottom: 1px solid $border-color;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .client-avatar {
+    position: relative;
+    flex-shrink: 0;
+
+    img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid $highlight-color;
+      transition: $transition-base;
+    }
+
+    .avatar-badge {
+      position: absolute;
+      bottom: -5px;
+      right: -5px;
+      width: 28px;
+      height: 28px;
+      background: $dark-bg;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid $highlight-color;
+    }
+  }
+
+  .client-meta {
+    flex: 1;
+
+    .client-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: $text;
+      margin-bottom: 5px;
+      letter-spacing: 2px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .client-position {
+      font-size: 0.85rem;
+      color: $highlight-color;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .client-rating {
+      display: flex;
+      gap: 4px;
+
+      .star {
+        color: $highlight-color;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  // Card Body
+  .testimonial-body {
+    padding: 30px;
+    position: relative;
+  }
+
+  .quote-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    opacity: 0.3;
+  }
+
+  .testimonial-text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: $text;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+    font-family: 'Courier New', monospace;
+    font-style: normal;
+  }
+
+  .testimonial-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid $border-color;
+  }
+
+  .project-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .project-label {
+      font-size: 0.75rem;
+      color: $text-light;
+      letter-spacing: 1px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .project-name {
+      font-size: 0.9rem;
+      color: $highlight-color;
+      font-weight: 600;
+      letter-spacing: 1px;
+      font-family: 'Courier New', monospace;
+    }
+  }
+
+  .testimonial-number {
+    font-size: 1.5rem;
+    color: $section-number-color;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+  }
+
+  // Testimonial Stats
+  .testimonial-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    padding: 40px;
+    background: rgba(46, 196, 182, 0.05);
+    border: 1px solid $border-color;
+    // border-left: 4px solid $highlight-color;
+
+    @media (max-width: $breakpoint-tablet) {
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .stat-item {
+      text-align: center;
+
+      .stat-value {
+        font-size: 3rem;
+        font-weight: 700;
+        color: $highlight-color;
+        margin-bottom: 10px;
+        font-family: 'Courier New', monospace;
+
+        @media (max-width: $breakpoint-mobile) {
+          font-size: 2.5rem;
+        }
+
+        .stat-max {
+          font-size: 1.5rem;
+          color: $text-light;
+        }
+      }
+
+      .stat-label {
+        font-size: 0.85rem;
+        color: $text-light;
+        letter-spacing: 2px;
+        font-family: 'Courier New', monospace;
+      }
+    }
+
+    .stat-divider {
+      font-size: 2rem;
+      color: $border-color;
+
+      @media (max-width: $breakpoint-tablet) {
+        display: none;
+      }
+    }
+  }
+}
+// ===================================
+// CONTACT SECTION - IMPROVED
+// ===================================
+
+#contact-section {
+  padding: 120px 0;
+  background: linear-gradient(135deg, $dark-bg 0%, #0d0d0d 100%);
+  position: relative;
+  font-family: 'Courier New', monospace;
+
+  @media (max-width: $breakpoint-desktop) {
+    padding: 80px 0;
+  }
+
+  // Contact Header
+  .contact-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 80px;
+    padding-bottom: 40px;
+    border-bottom: 2px solid $border-color;
+
+    @media (max-width: $breakpoint-desktop) {
+      flex-direction: column;
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .header-left {
+      flex: 1;
+
+      .section-title {
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: $text;
+        letter-spacing: 3px;
+        line-height: 1.2;
+        font-family: 'Courier New', monospace;
+      }
+
+      .contact-subtitle {
+        font-size: clamp(0.9rem, 2vw, 1.1rem);
+        color: $text-light;
+        letter-spacing: 1px;
+        line-height: 1.6;
+        font-family: 'Courier New', monospace;
+      }
+    }
+
+    .header-right {
+      .contact-badge {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+          position: absolute;
+          animation: rotate 20s linear infinite;
+        }
+
+        .badge-text {
+          text-align: center;
+          font-size: 0.9rem;
+          font-weight: 700;
+          color: $highlight-color;
+          letter-spacing: 1px;
+          line-height: 1.3;
+          font-family: 'Courier New', monospace;
+        }
+      }
+    }
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  // Contact Main Layout
+  .contact-main {
+    gap: 60px;
+
+    @media (max-width: $breakpoint-desktop) {
+      gap: 40px;
+    }
+  }
+
+  // ===================================
+  // LEFT COLUMN - CONTACT INFO
+  // ===================================
+
+  .contact-info-column {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  // Quick Info Card
+  .quick-info-card {
+    background: rgba(255, 255, 255, 0.03);
+    // border: 1px solid $border-color;
+    // border-left: 4px solid $highlight-color;
+    padding: 30px;
+    transition: $transition-base;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateX(5px);
+    }
+
+    .info-card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: $text;
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+      font-family: 'Courier New', monospace;
+    }
+  }
+
+  .info-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid transparent;
+    transition: $transition-base;
+    text-decoration: none;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: $highlight-color;
+      transform: translateX(5px);
+
+      .info-icon {
+        background: $highlight-color;
+
+        svg {
+          stroke: $dark-bg;
+        }
+      }
+    }
+
+    .info-icon {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(46, 196, 182, 0.1);
+      border: 1px solid $highlight-color;
+      transition: $transition-base;
+      flex-shrink: 0;
+
+      svg {
+        stroke: $highlight-color;
+        transition: $transition-base;
+      }
+    }
+
+    .info-details {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      .info-label {
+        font-size: 0.75rem;
+        color: $text-light;
+        letter-spacing: 1px;
+        font-family: 'Courier New', monospace;
+      }
+
+      .info-value {
+        font-size: 1rem;
+        color: $text;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        font-family: 'Courier New', monospace;
+      }
+    }
+  }
+
+  // Social Card
+  .social-card {
+    background: rgba(46, 196, 182, 0.05);
+    border: 1px solid $highlight-color;
+    padding: 30px;
+    transition: $transition-base;
+
+    &:hover {
+      background: rgba(46, 196, 182, 0.08);
+      box-shadow: 0 10px 30px rgba(46, 196, 182, 0.2);
+    }
+
+    .social-card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: $text;
+      margin-bottom: 25px;
+      letter-spacing: 2px;
+      font-family: 'Courier New', monospace;
+    }
+  }
+
+  .social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid transparent;
+    color: $text;
+    text-decoration: none;
+    transition: $transition-base;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: $highlight-color;
+      color: $highlight-color;
+      transform: translateX(5px);
+
+      svg {
+        fill: $highlight-color;
+      }
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+      fill: $text-light;
+      transition: $transition-base;
+    }
+
+    span {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+  }
+
+  // ===================================
+  // RIGHT COLUMN - CONTACT FORM
+  // ===================================
+
+  .contact-form-column {
+    .form-container {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid $border-color;
+      padding: 40px;
+
+      @media (max-width: $breakpoint-mobile) {
+        padding: 25px;
+      }
+    }
+
+    .form-header {
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid $border-color;
+
+      .form-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: $text;
+        margin-bottom: 10px;
+        letter-spacing: 2px;
+        font-family: 'Courier New', monospace;
+      }
+
+      .form-description {
+        font-size: 0.85rem;
+        color: $highlight-color;
+        letter-spacing: 1px;
+        font-family: 'Courier New', monospace;
+      }
+    }
+  }
+
+  .contact-form {
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 0;
+
+      @media (max-width: $breakpoint-tablet) {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+
+      &.half {
+        margin-bottom: 0;
+      }
+
+      label,
+      legend {
+        display: block;
+        margin-bottom: 12px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: $text;
+        letter-spacing: 1px;
+        font-family: 'Courier New', monospace;
+        text-transform: uppercase;
+
+        .label-indicator {
+          color: $highlight-color;
+          animation: blink 1.5s infinite;
+
+          &.optional {
+            color: $text-light;
+          }
+        }
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid $border-color;
+        color: $text;
+        font-size: 0.95rem;
+        transition: $transition-base;
+        font-family: 'Courier New', monospace;
+        letter-spacing: 0.5px;
+
+        &:focus {
+          outline: none;
+          border-color: $highlight-color;
+          background: rgba(255, 255, 255, 0.08);
+          box-shadow: 0 0 0 3px rgba(46, 196, 182, 0.1);
+        }
+
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.3);
+          font-family: 'Courier New', monospace;
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 150px;
+      }
+
+      select {
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%232ec4b6' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 15px center;
+        padding-right: 40px;
+      }
+
+      .error-message {
+        display: block;
+        color: #ff6b6b;
+        font-size: 0.8rem;
+        margin-top: 8px;
+        font-family: 'Courier New', monospace;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    // Checkbox Grid
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+
+      @media (max-width: $breakpoint-mobile) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid $border-color;
+      transition: $transition-base;
+      font-family: 'Courier New', monospace;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: $highlight-color;
+      }
+
+      input[type='checkbox'] {
+        display: none;
+
+        &:checked + .checkbox-custom {
+          background: $highlight-color;
+          border-color: $highlight-color;
+
+          &::after {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+      }
+
+      .checkbox-custom {
+        width: 20px;
+        height: 20px;
+        border: 2px solid $border-color;
+        background: transparent;
+        position: relative;
+        transition: $transition-base;
+        flex-shrink: 0;
+
+        &::after {
+          content: '✓';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) scale(0);
+          color: $dark-bg;
+          font-weight: 700;
+          font-size: 0.8rem;
+          opacity: 0;
+          transition: $transition-base;
+        }
+      }
+
+      .checkbox-text {
+        font-size: 0.85rem;
+        color: $text;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    // Character Count
+    .character-count {
+      text-align: right;
+      font-size: 0.75rem;
+      color: $text-light;
+      margin-top: 8px;
+      font-family: 'Courier New', monospace;
+
+      #charCount {
+        color: $highlight-color;
+        font-weight: 700;
+      }
+    }
+
+    // Form Actions
+    .form-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 18px 30px;
+      background: $highlight-color;
+      border: 2px solid $highlight-color;
+      color: $dark-bg;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: $transition-base;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      font-family: 'Courier New', monospace;
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.5s ease;
+      }
+
+      &:hover:not(:disabled) {
+        background: transparent;
+        color: $highlight-color;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(46, 196, 182, 0.3);
+
+        &::before {
+          left: 100%;
+        }
+
+        .btn-icon {
+          transform: translateX(5px);
+        }
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .btn-icon {
+        transition: transform 0.3s ease;
+
+        svg {
+          stroke: currentColor;
+        }
+      }
+    }
+
+    .form-note {
+      text-align: center;
+      font-size: 0.8rem;
+      color: $text-light;
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 1px;
+    }
+
+    .form-message {
+      margin-top: 20px;
+      padding: 15px;
+      text-align: center;
+      font-weight: 600;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 1px;
+
+      &.success {
+        background: rgba(46, 196, 182, 0.2);
+        border: 2px solid $highlight-color;
+        color: $highlight-color;
+      }
+
+      &.error {
+        background: rgba(255, 107, 107, 0.2);
+        border: 2px solid #ff6b6b;
+        color: #ff6b6b;
+      }
+    }
+  }
+}
+
+// Blink animation for cursor indicator
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+// ===================================
+// 15. FOOTER SECTION
+// ===================================
+
+.footer-section {
+  position: relative;
+  background-color: $dark-bg;
+  padding: 80px 0 40px;
+  color: $text;
+  overflow: hidden;
+
+  @media (max-width: $breakpoint-desktop) {
+    padding: 60px 0 30px;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    padding: 40px 0 20px;
+  }
+}
+
+.footer-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.footer-content {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 60px;
+  border-bottom: 1px solid $border-color;
+
+  @media (max-width: $breakpoint-tablet) {
+    padding-bottom: 40px;
+  }
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  @media (max-width: $breakpoint-tablet) {
+    margin-bottom: 30px;
+  }
+
+  li {
+    margin-bottom: 15px;
+
+    a {
+      color: $text;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      transition: $transition-base;
+      position: relative;
+      display: inline-block;
+
+      &:hover {
+        color: $highlight-color;
+        transform: translateX(5px);
+      }
+    }
+  }
+}
+
+.newsletter {
+  label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    color: $text;
+
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 0.8rem;
+    }
+  }
+
+  .input-group {
+    display: flex;
+    border-bottom: 1px solid $text-light;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+  }
+
+  .form-control {
+    background: transparent;
+    border: none;
+    color: $text;
+    padding: 0;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    flex: 1;
+
+    &::placeholder {
+      color: $text-light;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  .newsletter-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: $transition-base;
+
+    svg {
+      transition: transform 0.3s ease;
+    }
+
+    &:hover svg {
+      transform: translateX(5px);
+    }
+  }
+
+  .newsletter-message {
+    font-size: 0.8rem;
+    margin-top: 10px;
+
+    &.success {
+      color: $highlight-color;
+    }
+
+    &.error {
+      color: #ff6b6b;
+    }
+  }
+}
+
+.footer-bottom {
+  position: relative;
+  z-index: 1;
+  padding-top: 40px;
+
+  @media (max-width: $breakpoint-tablet) {
+    padding-top: 30px;
+  }
+
+  .footer-logo {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 700;
+    letter-spacing: 5px;
+    margin-bottom: 40px;
+    text-align: center;
+    color: $text;
+
+    @media (max-width: $breakpoint-tablet) {
+      margin-bottom: 20px;
+    }
+  }
+
+  .copyright {
+    font-size: 0.85rem;
+    color: $text-light;
+
+    @media (max-width: $breakpoint-tablet) {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 0.75rem;
+    }
+  }
+
+  .location {
+    font-size: 0.85rem;
+    color: $text-light;
+    text-align: right;
+
+    @media (max-width: $breakpoint-tablet) {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 0.75rem;
+    }
+  }
+}
+
+// ===================================
+// 16. BACK TO TOP BUTTON
+// ===================================
+
+.back-to-top {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 50px;
+  height: 50px;
+  background: $highlight-color;
+  border: none;
+  border-radius: 50%;
+  color: $dark-bg;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: $transition-base;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(46, 196, 182, 0.3);
+
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(46, 196, 182, 0.5);
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+  }
+}
+
+// ===================================
+// 17. COOKIE BANNER
+// ===================================
+
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(10, 10, 10, 0.98);
+  border-top: 1px solid $border-color;
+  padding: 20px;
+  z-index: 9999;
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+  backdrop-filter: blur(10px);
+
+  &.show {
+    transform: translateY(0);
+  }
+}
+
+.cookie-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+
+  @media (max-width: $breakpoint-tablet) {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  p {
+    margin: 0;
+    color: $text-light;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    flex: 1;
+
+    a {
+      color: $highlight-color;
+      text-decoration: none;
+      font-weight: 600;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.cookie-buttons {
+  display: flex;
+  gap: 15px;
+  flex-shrink: 0;
+
+  @media (max-width: $breakpoint-tablet) {
+    width: 100%;
+  }
+}
+
+.btn-cookie {
+  padding: 10px 25px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: $transition-base;
+  font-family: $font-primary;
+
+  @media (max-width: $breakpoint-tablet) {
+    flex: 1;
+  }
+
+  &.decline {
+    background: transparent;
+    border: 1px solid $border-color;
+    color: $text;
+
+    &:hover {
+      border-color: $text;
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  &.accept {
+    background: $highlight-color;
+    color: $dark-bg;
+
+    &:hover {
+      background: #26a396;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(46, 196, 182, 0.3);
+    }
+  }
+}
+
+// ===================================
+// 18. LIVE CHAT WIDGET
+// ===================================
+
+.chat-widget {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+
+  @media (max-width: $breakpoint-tablet) {
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+.chat-toggle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: $highlight-color;
+  border: none;
+  color: $dark-bg;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(46, 196, 182, 0.4);
+  transition: $transition-base;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(46, 196, 182, 0.6);
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    width: 55px;
+    height: 55px;
+  }
+}
+
+.chat-notification {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ff6b6b;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(255, 107, 107, 0.5);
+}
+
+.chat-window {
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  width: 350px;
+  height: 500px;
+  background: rgba(10, 10, 10, 0.98);
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+
+  @media (max-width: $breakpoint-mobile) {
+    width: calc(100vw - 40px);
+    right: -10px;
+  }
+}
+
+.chat-header {
+  padding: 20px;
+  background: $highlight-color;
+  color: $dark-bg;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 12px 12px 0 0;
+
+  h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+}
+
+.chat-close {
+  background: none;
+  border: none;
+  color: $dark-bg;
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: $transition-base;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $highlight-color;
+    border-radius: 3px;
+  }
+}
+
+.chat-message {
+  margin-bottom: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  max-width: 80%;
+  animation: slideIn 0.3s ease;
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  &.bot {
+    background: rgba(46, 196, 182, 0.1);
+    border: 1px solid $highlight-color;
+  }
+
+  &.user {
+    background: rgba(255, 255, 255, 0.1);
+    margin-left: auto;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chat-input-container {
+  padding: 15px;
+  border-top: 1px solid $border-color;
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid $border-color;
+  color: $text;
+  border-radius: 6px;
+  font-family: $font-primary;
+  font-size: 0.9rem;
+
+  &:focus {
+    outline: none;
+    border-color: $highlight-color;
+  }
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+.chat-send {
+  padding: 10px 20px;
+  background: $highlight-color;
+  border: none;
+  color: $dark-bg;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: $transition-base;
+  font-family: $font-primary;
+
+  &:hover {
+    background: #26a396;
+  }
+}
+
+// ===================================
+// 19. RESPONSIVE UTILITIES
+// ===================================
+
+@media (max-width: $breakpoint-tablet) {
+  .container {
+    padding: 0 15px;
+  }
+}
+
+// ===================================
+// 20. PRINT STYLES
+// ===================================
+
+@media print {
+  .navbar,
+  .back-to-top,
+  .cookie-banner,
+  .chat-widget,
+  .scroll-progress,
+  .custom-cursor,
+  .cursor-dot {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+}
